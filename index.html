@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Tesoro Mágico del Patio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Comic+Neue&display=swap');
+        body {
+            font-family: 'Comic Neue', cursive;
+        }
+        .page {
+            display: none;
+            transition: transform 0.6s ease-in-out;
+        }
+        .page.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-blue-200 flex items-center justify-center min-h-screen">
+
+    <div class="w-full max-w-lg mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
+        <div class="flex flex-col items-center">
+            <img id="image" src="0.jpeg" alt="Portada" class="w-full">
+            <p id="text" class="p-4 text-lg text-center"></p>
+            <div class="flex justify-between w-full p-4">
+                <button id="prevBtn" class="bg-blue-500 text-white px-4 py-2 rounded">Anterior</button>
+                <button id="nextBtn" class="bg-blue-500 text-white px-4 py-2 rounded">Siguiente</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const pages = [
+            {
+                img: "Portada.jpeg",
+                text: "TÍTULO: 'EL TESORO MÁGICO DEL PATIO'. CUATRO AMIGOS: NAHIKARI, VERA, HODEI Y EKAITZ DESCUBRIENDO UNA AVENTURA INCREÍBLE."
+            },
+            {
+                img: "1.jpeg",
+                text: "NAHIKARI, VERA, HODEI Y EKAITZ SON CUATRO AMIGOS. LES ENCANTA JUGAR JUNTOS EN EL PATIO DE SU ESCUELA. NAHIKARI TIENE EL PELO CASTAÑO OSCURO, VERA ES RUBIA, HODEI TIENE EL PELO RUBIO-ROJIZO Y EKAITZ TIENE EL PELO NEGRO. TODOS TIENEN 6 AÑOS."
+            },
+            {
+                img: "2.jpeg",
+                text: "UN DÍA, MIENTRAS JUGABAN, HODEI DIJO: '¿QUÉ ES ESO QUE BRILLA ALLÍ?' NAHIKARI: '¡PARECE UNA PEQUEÑA CAJA DEL TESORO!' VERA: '¡VAMOS A EXAMINARLA!' EKAITZ: '¡YUPI, UNA AVENTURA!' TODOS CORRIERON HACIA LA CAJITA FASCINADOS."
+            },
+            {
+                img: "3.jpeg",
+                text: "EMOCIONADOS, LOS CUATRO AMIGOS SE DIERON PRISA PARA ABRIRLA. NAHIKARI Y VERA AGARRARON LA TAPA MIENTRAS HODEI Y EKAITZ AYUDABAN. VERA: 'A LA CUENTA DE TRES. ¡UNO, DOS, Y TRES!' ¡ZAS! LA CAJA SE ABRIÓ LLENANDO EL PATIO DE LUCES MÁGICAS."
+            },
+            {
+                img: "4.jpeg",
+                text: "DE LA CAJA SALIÓ UN DRAGÓN COLORIDO Y AMISTOSO. DRAGÓN RIMANTE: '¡HOLA, AMIGOS MÍOS! CON RIMAS Y RISAS, VERÁN LO DIVERTIDO QUE ES TODO AQUÍ!' HODEI: '¡UN DRAGÓN QUE HABLA!' EKAITZ: '¡ESTO SE PONE CADA VEZ MEJOR!'"
+            },
+            {
+                img: "5.jpeg",
+                text: "DRAGÓN RIMANTE TENÍA ALAS DE ARCOÍRIS Y OJOS BRILLANTES. LE ENCANTABA HABLAR EN RIMAS Y HACER BROMAS DIVERTIDAS. DRAGÓN RIMANTE: 'SOY DRAGÓN RIMANTE, TODO COLOR Y ENCANTO. CONMIGO, AMIGOS, ¡NUNCA HABRÁ DESCANSO!'"
+            },
+            {
+                img: "6.jpeg",
+                text: "DRAGÓN RIMANTE Y LOS NIÑOS DECIDIERON EXPLORAR JUNTOS EL PATIO. ENCONTRABAN COSAS GRACIOSAS, COMO UNA PELOTA ENREDADA EN UN ÁRBOL. NAHIKARI: '¡MIRA ESA PELOTA! ¿CÓMO TERMINÓ ALLÍ ARRIBA?' VERA: '¡AQUÍ HAY MÁS TESOROS DE LOS QUE PENSAMOS!' DRAGÓN RIMANTE: 'A JUGAR Y REÍR SIN TEMOR, ¡CON RISAS TODO ESPECTACULAR! ESTA AVENTURA NO TIENE FINAL.'"
+            },
+            {
+                img: "7.jpeg",
+                text: "DRAGÓN RIMANTE ENSEÑÓ A LOS NIÑOS SOBRE LA AMISTAD Y CÓMO COMPARTIR. LO HIZO A TRAVÉS DE UN DIVERTIDO JUEGO DE RIMAS. DRAGÓN RIMANTE: 'COMPARTIR Y COLABORAR, AMIGOS... ¡SIEMPRE ES LA MEJOR FORMA DE CRECER! JUNTOS PODEMOS LLEGAR MÁS LEJOS, ¡VAMOS A JUGAR YA!' NAHIKARI: '¿CUÁL ES EL JUEGO?' DRAGÓN RIMANTE: 'ES FÁCIL Y DIVERTIDO, CON LOS AMIGOS NUNCA ESTÁS PERDIDO. CON RIMAS Y RISAS LO LOGRARÁN, ¡CONMIGO TODO SALDRÁ BIEN!'"
+            },
+            {
+                img: "8.jpeg",
+                text: "LOS NIÑOS SE ENFRENTARON A UN DESAFÍO DIVERTIDO: DESATAR LA PELOTA DEL ÁRBOL, SOLO PUDIERON HACERLO TRABAJANDO JUNTOS. HODEI: 'SI TIRAMOS TODOS JUNTOS, PODREMOS SACAR LA PELOTA.' EKAITZ: '¡SÍ, EN EQUIPO LO LOGRAREMOS!'"
+            },
+            {
+                img: "9.jpeg",
+                text: "TRAS SUPERAR EL DESAFÍO, CELEBRARON CON RISAS Y ALEGRÍA. DRAGÓN RIMANTE: '¡LO HICIERON MARAVILLOSO, AMIGOS! CELEBREMOS SU ÉXITO SIENDO AMIGOS MÁS FUERTES. ¡UNIDOS SIEMPRE SERÉIS INVENCIBLES!' NAHIKARI: '¡FUE DIVERTIDO!' VERA: '¡SÍ, JUGUÉMOS MÁS!'"
+            },
+            {
+                img: "10.jpeg",
+                text: "DRAGÓN RIMANTE SE DESPIDIÓ, PERO PROMETIÓ VOLVER. LOS NIÑOS QUEDARON CON PRECIOSAS LECCIONES Y RECUERDOS. DRAGÓN RIMANTE: '¡HASTA PRONTO, AMIGOS! SIEMPRE ESTARÉ CERCA PARA CANTAR Y CUIDAR. ¡QUE LA MAGIA DE LA AMISTAD NO PARE DE BRILLAR!' HODEI: '¡ADIÓS, DRAGÓN RIMANTE!' EKAITZ: '¡GRACIAS POR LAS LECCIONES!'"
+            },
+            {
+                img: "11.jpeg",
+                text: "AL FINAL DEL DÍA, SENTADOS JUNTOS, REFLEXIONARON SOBRE LA IMPORTANCIA DE LA AMISTAD, LA IMAGINACIÓN Y COMPARTIR. NAHIKARI: 'HOY APRENDIMOS MUCHO.' VERA: 'Y NOS DIVERTIMOS TAMBIÉN.' HODEI: '¡SER AMIGOS ES LO MEJOR!' EKAITZ: 'SIEMPRE COMPARTIREMOS NUESTRAS AVENTURAS.' JUNTOS: '¡GRACIAS, DRAGÓN RIMANTE!'"
+            }
+        ];  // Continúa añadiendo las páginas de la historia aquí
+
+        let currentPage = 0;
+
+        document.getElementById("prevBtn").addEventListener("click", () => {
+            if (currentPage > 0) currentPage--;
+            updatePage();
+        });
+
+        document.getElementById("nextBtn").addEventListener("click", () => {
+            if (currentPage < pages.length - 1) currentPage++;
+            updatePage();
+        });
+
+        function updatePage() {
+            document.getElementById("image").src = pages[currentPage].img;
+            document.getElementById("text").textContent = pages[currentPage].text;
+        }
+
+        updatePage(); 
+    </script>
+</body>
+</html>
